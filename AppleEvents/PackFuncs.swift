@@ -57,7 +57,7 @@ public func packAsString(_ value: String) -> ScalarDescriptor {
 public func packAsDate(_ value: Date) -> ScalarDescriptor {
     // caution: typeLongDateTime does not support sub-second precision; unfortunately, there isn't a desc type for TimeInterval (Double) since OSX epoch
     // TO DO: what about typeISO8601DateTime?
-    return ScalarDescriptor(type: typeLongDateTime, data: encodeFixedWidthInteger(Int64(value.timeIntervalSinceReferenceDate - epochDelta)))
+    return ScalarDescriptor(type: typeLongDateTime, data: encodeFixedWidthInteger(Int64(value.timeIntervalSinceReferenceDate + kCFAbsoluteTimeIntervalSince1904)))
 }
 
 public func packAsFileURL(_ value: URL) throws -> ScalarDescriptor {

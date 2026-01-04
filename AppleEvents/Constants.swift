@@ -2,7 +2,7 @@
 //  Constants.swift
 //
 
-// TO DO: trim down constants list; TO DO: below constants should be macro-d out when already defined in Carbon/Foundation
+// TO DO: trim down constants list; TO DO: below constants should be macro-d out when already defined in Carbon/Foundation // ETA: except Foundation doesn't always correctly declare them as OSType: some appear as Int, which is wrong; in addition, the Foundation definitions now seem to have precedence over the AppleEvents definitions, even when `AppleEvents.kNAME` is explicit, instead of being masked by them (the original purpose of this file)
 
 import Foundation
 
@@ -82,10 +82,10 @@ public let kAEAND: OSType = 0x414E4420
 public let kAEOR: OSType = 0x4F522020
 public let kAENOT: OSType = 0x4E4F5420
 
-public let kAEFirst: OSType = 0x66697273
-public let kAEMiddle: OSType = 0x6D696464
-public let kAELast: OSType = 0x6C617374
-public let kAEAny: OSType = 0x616E7920
+public let kAEFirst_: OSType = 0x66697273
+public let kAEMiddle_: OSType = 0x6D696464
+public let kAELast_: OSType = 0x6C617374
+public let kAEAny_: OSType = 0x616E7920
 public let kAEAll: OSType = 0x616C6C20
 
 

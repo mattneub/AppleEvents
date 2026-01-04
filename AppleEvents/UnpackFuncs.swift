@@ -187,10 +187,10 @@ public func unpackAsString(_ descriptor: Descriptor) throws -> String { // coerc
 
 
 public func unpackAsDate(_ descriptor: Descriptor) throws -> Date {
-    let delta: TimeInterval
     switch descriptor.type {
     case typeLongDateTime: // assumes data handle is valid for descriptor type
-        delta = TimeInterval(try unpackAsInteger(descriptor) as Int64)
+        let delta = TimeInterval(Int64(bigEndian: try decodeFixedWidthValue(descriptor.data)))
+        return Date(timeIntervalSinceReferenceDate: delta - kCFAbsoluteTimeIntervalSince1904)
     case typeISO8601DateTime:
         guard let result = try? decodeISO8601Date(descriptor.data) else { throw AppleEventError.corruptData }
         return result
@@ -200,7 +200,6 @@ public func unpackAsDate(_ descriptor: Descriptor) throws -> Date {
     default:
         throw AppleEventError.unsupportedCoercion
     }
-    return Date(timeIntervalSinceReferenceDate: delta + epochDelta)
 }
 
 

@@ -21,8 +21,6 @@ public typealias EventIdentifier = UInt64 // combined eventClass and eventID
 
 public let noOSType: OSType = 0
 
-internal let epochDelta: TimeInterval = 35430.0 * 24 * 3600; // offset from 1904-01-01 to 2001-01-01
-
 internal var isLittleEndianHost: Bool { let n: UInt16 = 1; return n.littleEndian == n }
 
 
