@@ -233,13 +233,13 @@ public struct LogicalDescriptor: TestDescriptor {
 
 public extension TestDescriptor {
     
-    static func &&(lhs: TestDescriptor, rhs: TestDescriptor) -> TestDescriptor {
+    static func &&(lhs: Self, rhs: Self) -> TestDescriptor {
         return LogicalDescriptor(AND: [lhs, rhs])
     }
-    static func ||(lhs: TestDescriptor, rhs: TestDescriptor) -> TestDescriptor {
+    static func ||(lhs: Self, rhs: Self) -> TestDescriptor {
         return LogicalDescriptor(OR: [lhs, rhs])
     }
-    static prefix func !(lhs: TestDescriptor) -> TestDescriptor {
+    static prefix func !(lhs: Self) -> TestDescriptor {
         return LogicalDescriptor(NOT: lhs)
     }
 }
