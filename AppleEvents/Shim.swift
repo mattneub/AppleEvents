@@ -8,7 +8,11 @@
 func carbonDescriptor(from desc: Descriptor, to result: inout AEDesc) {
     var data = desc.flatten()
     let err = data.withUnsafeMutableBytes { (ptr: UnsafeMutableRawBufferPointer) -> Int in
-        return Int(AEUnflattenDesc(ptr.baseAddress, &result))
+        if #available(macOS 11, *) {
+            return Int(AEUnflattenDescFromBytes(ptr.baseAddress, ptr.count, &result))
+        } else {
+            return Int(AEUnflattenDesc(ptr.baseAddress, &result))
+        }
     }
     if err != 0 { fatalError("AEUnflattenDesc error \(err), presumably due to malformed Descriptor.flatten() output.") }
 }
