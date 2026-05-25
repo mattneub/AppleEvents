@@ -31,7 +31,8 @@ import AppleEvents
     var data = data
     var result = AEDesc(descriptorType: typeNull, dataHandle: nil)
     let err = data.withUnsafeMutableBytes { (ptr: UnsafeMutableRawBufferPointer) -> Int in
-        return Int(AEUnflattenDesc(ptr.baseAddress, &result))
+        //return Int(AEUnflattenDesc(ptr.baseAddress, &result))
+        return Int(AEUnflattenDescFromBytes(ptr.baseAddress, ptr.count, &result))
     }
     if err != 0 {
         print("Unflatten error \(err).")
