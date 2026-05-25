@@ -47,6 +47,7 @@ CF_ENUM(DescType) {
 extern Size         AESizeOfFlattenedDesc(const AEDesc *theAEDesc);
 extern OSStatus     AEFlattenDesc(const AEDesc *theAEDesc, Ptr buffer, Size bufferSize, Size *actualSize);
 extern OSStatus     AEUnflattenDesc(const void *buffer, AEDesc *result);
+extern OSStatus     AEUnflattenDescFromBytes(const void *buffer, size_t bufferSize, AEDesc *result);
 extern OSErr        AEDisposeDesc(AEDesc *theAEDesc);
 extern OSErr        AEPutParamDesc(AppleEvent *theAppleEvent, AEKeyword theAEKeyword, const AEDesc *theAEDesc);
 extern mach_port_t  AEGetRegisteredMachPort(void);

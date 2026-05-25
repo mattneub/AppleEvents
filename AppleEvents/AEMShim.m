@@ -19,6 +19,7 @@ char *coreServicesPath = "/System/Library/Frameworks/CoreServices.framework";
 static Size         (*ptr_AESizeOfFlattenedDesc)(const AEDesc *theAEDesc);
 static OSStatus     (*ptr_AEFlattenDesc)(const AEDesc *theAEDesc, Ptr buffer, Size bufferSize, Size *actualSize);
 static OSStatus     (*ptr_AEUnflattenDesc)(const void *buffer, AEDesc *result);
+static OSStatus     (*ptr_AEUnflattenDescFromBytes)(const void *buffer, size_t bufferSize, AEDesc *result);
 static OSErr        (*ptr_AEDisposeDesc)(AEDesc *theAEDesc);
 static OSErr        (*ptr_AEPutParamDesc)(AppleEvent *theAppleEvent, AEKeyword theAEKeyword, const AEDesc *theAEDesc);
 static mach_port_t  (*ptr_AEGetRegisteredMachPort)(void);
@@ -37,7 +38,7 @@ void loadCarbon(void) {
     if (framework) {
         BIND(AESizeOfFlattenedDesc);
         BIND(AEFlattenDesc);
-        BIND(AEUnflattenDesc);
+        BIND(AEUnflattenDescFromBytes);
         BIND(AEDisposeDesc);
         BIND(AEPutParamDesc);
         BIND(AEGetRegisteredMachPort);
@@ -57,6 +58,9 @@ extern OSStatus AEFlattenDesc(const AEDesc *theAEDesc, Ptr buffer, Size bufferSi
 }
 extern OSStatus AEUnflattenDesc(const void *buffer, AEDesc *result) {
     LOAD; return (*ptr_AEUnflattenDesc)(buffer, result);
+}
+extern OSStatus AEUnflattenDescFromBytes(const void *buffer, size_t bufferSize, AEDesc *result) {
+    LOAD; return (*ptr_AEUnflattenDescFromBytes)(buffer, bufferSize, result);
 }
 extern OSErr AEDisposeDesc(AEDesc *theAEDesc) {
     LOAD; return (*ptr_AEDisposeDesc)(theAEDesc);
